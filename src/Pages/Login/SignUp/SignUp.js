@@ -1,5 +1,4 @@
 import React from 'react';
-//import { FaGoogle, FaGithub } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 
 const SignUp = () => {
@@ -30,12 +29,9 @@ const SignUp = () => {
                                         <span className="label-text">Password</span>
                                     </label>
                                     <input type="text" name='password' placeholder="password" className="input input-bordered" required />
-                                    <label className="label">
-                                        <Link href="#" className="label-text-alt link link-hover">Forgot password?</Link>
-                                    </label>
                                 </div>
                                 <div className="form-control mt-6">
-                                    <button className="btn btn-primary">Login</button>
+                                    <button className="btn btn-primary">Sign up</button>
                                 </div>
 
                                 <div className=" mt-6">
