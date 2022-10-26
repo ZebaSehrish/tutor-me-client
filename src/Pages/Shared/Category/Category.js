@@ -7,19 +7,14 @@ const Category = () => {
     const { title, image_url, details } = category;
     return (
         <div className='m-10'>
-            <div className="grid grid-rows-2 grid-flow-col gap-4">
-                <div><LeftSideNav></LeftSideNav></div>
-                <div className="mt-16 row-span-6 col-span-6 ...">
-                    <div className="card lg:card-side bg-base-100 shadow-xl">
-                        <figure><img src={image_url} alt="Album" /></figure>
-                        <div className="card-body">
-                            <h2 className="card-title">{title}</h2>
-                            <p>{details}</p>
-                            <div className="card-actions justify-end">
-                                <button className="btn btn-primary">Enroll now</button>
-                            </div>
-                        </div>
-                    </div>
+            <div className='card-container'>
+                <div className='row-span-4'><LeftSideNav></LeftSideNav></div>
+                <div className='course-container mt-16'>
+                    {
+                        // allCourseCategories.map(courseCategory => <CourseDetailCard key={courseCategory.id}
+                        //     courseCategory={courseCategory}
+                        // ></CourseDetailCard>)
+                    }
                 </div>
             </div>
         </div>

@@ -1,24 +1,27 @@
 import React from 'react';
-import { useLoaderData } from 'react-router-dom';
+import './Courses.css';
+import { FaArrowRight } from 'react-icons/fa';
+import { Link, useLoaderData } from 'react-router-dom';
 import CourseDetailCard from '../CourseDetailsCard/CourseDetailCard';
 import LeftSideNav from '../LeftSideNav/LeftSideNav';
 const Courses = () => {
-    const allCourseDetails = useLoaderData();
-    console.log(allCourseDetails);
+    const allCourseCategories = useLoaderData();
+    console.log(allCourseCategories);
     return (
         <div>
-            <div className="grid grid-rows-2 grid-flow-col gap-4">
-                <div><LeftSideNav></LeftSideNav></div>
-                {/* <div className="col-span-2 ...">02</div> */}
-                <div className="row-span-3 col-span-3 ...">03</div>
-                <h2>home:{allCourseDetails.length}</h2>
-                {
-                    allCourseDetails.map(courseDetails => <CourseDetailCard key={courseDetails.category_id}
-                        courseDetails={courseDetails}
-                    ></CourseDetailCard>)
-                }
+            <div className='card-container'>
+                <div className='row-span-4'><LeftSideNav></LeftSideNav></div>
+                <div className='course-container mt-16'>
+                    {
+                        allCourseCategories.map(courseCategory => <CourseDetailCard key={courseCategory.id}
+                            courseCategory={courseCategory}
+                        ></CourseDetailCard>)
+                    }
+                </div>
             </div>
         </div>
+
+
     );
 };
 
