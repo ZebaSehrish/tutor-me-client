@@ -1,9 +1,24 @@
 import React from 'react';
+import { useLoaderData } from 'react-router-dom';
+import CourseDetailCard from '../Shared/CourseDetailsCard/CourseDetailCard';
+import LeftSideNav from '../Shared/LeftSideNav/LeftSideNav';
 
 const Home = () => {
+    const allCourseDetails = useLoaderData();
+    console.log(allCourseDetails);
     return (
         <div>
-            <h2>home</h2>
+            <div className="grid grid-rows-2 grid-flow-col gap-4">
+                <div><LeftSideNav></LeftSideNav></div>
+                {/* <div className="col-span-2 ...">02</div> */}
+                <div className="row-span-3 col-span-3 ...">03</div>
+                <h2>home:{allCourseDetails.length}</h2>
+                {
+                    allCourseDetails.map(courseDetails => <CourseDetailCard key={courseDetails.category_id}
+                        courseDetails={courseDetails}
+                    ></CourseDetailCard>)
+                }
+            </div>
         </div>
     );
 };

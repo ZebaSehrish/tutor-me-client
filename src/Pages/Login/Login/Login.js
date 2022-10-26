@@ -1,8 +1,17 @@
-import React from 'react';
+import { GoogleAuthProvider } from 'firebase/auth';
+import React, { useContext, useState } from 'react';
 import { FaGoogle, FaGithub } from 'react-icons/fa';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { AuthContext } from '../../../Contexts/AuthProvider/AuthProvider';
 
 const Login = () => {
+    const [error, setError] = useState('');
+    const { signIn } = useContext(AuthContext);
+
+    const navigate = useNavigate();
+    // const location = useLocation();
+
+    // const from = location.state?.from?.pathname || '/';
 
     const handleLoginSubmit = event => {
         event.preventDefault();
@@ -11,6 +20,31 @@ const Login = () => {
         const email = form.email.value;
         const password = form.password.value;
         console.log(email, password);
+        signIn(email, password)
+            .then(result => {
+                const user = result.user;
+                console.log(user);
+                form.reset();
+                setError('');
+                navigate('/');
+                // navigate(from, { replace: true })
+            })
+            .catch(error => {
+                console.error(error);
+                setError(error.message);
+            })
+    }
+
+    const { providerLogin } = useContext(AuthContext);
+    const googleProvider = new GoogleAuthProvider();
+
+    const handleGoogleSignIn = () => {
+        providerLogin(googleProvider)
+            .then(result => {
+                const user = result.user;
+                console.log(user);
+            })
+            .catch(error => console.error(error))
     }
 
     return (
@@ -33,7 +67,7 @@ const Login = () => {
                                     <label className="label">
                                         <span className="label-text">Password</span>
                                     </label>
-                                    <input type="text" name='password' placeholder="password" className="input input-bordered" required />
+                                    <input type="password" name='password' placeholder="password" className="input input-bordered" required />
                                     <label className="label">
                                         <Link href="#" className="label-text-alt link link-hover">Forgot password?</Link>
                                     </label>
@@ -41,18 +75,19 @@ const Login = () => {
                                 <div className="form-control mt-6">
                                     <button className="btn btn-primary">Login</button>
                                 </div>
-                                <div className="form-control mt-6">
-                                    <button className="btn btn-primary bg-gray-300 text-black"><FaGoogle className='mr-2 text-blue-600'></FaGoogle>Sign in with Google</button>
-                                </div>
-                                <div className="form-control mt-6">
-                                    <button className="btn btn-primary bg-gray-300 text-black"><FaGithub className='mr-2'></FaGithub>Sign in with Github</button>
-                                </div>
-                                <div className=" mt-6">
-                                    New to this website? Please  <Link to='/signUp' className="btn btn-primary bg-gray-300 text-black">Register </Link>
-                                </div>
+
                             </div>
                         </div>
                     </form>
+                    <div className="form-control mt-6">
+                        <button className="btn btn-primary bg-gray-300 text-black"><FaGoogle className='mr-2 text-blue-600'></FaGoogle>Sign in with Google</button>
+                    </div>
+                    <div className="form-control mt-6">
+                        <button onClick={handleGoogleSignIn} className="btn btn-primary bg-gray-300 text-black"><FaGithub className='mr-2'></FaGithub>Sign in with Github</button>
+                    </div>
+                    <div className=" mt-6">
+                        New to this website? Please  <Link to='/signUp' className="btn btn-primary bg-gray-300 text-black">Register </Link>
+                    </div>
 
                 </div>
             </div>
