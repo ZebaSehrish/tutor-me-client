@@ -12,7 +12,7 @@ const Details = ({ categoryDetails }) => {
     }
 
     return (
-        <div className='m-0'>
+        <div className='m-0 mb-10'>
             <div className="card w-96 bg-base-100 shadow-xl">
                 <figure className="px-10 pt-2">
                     <img src={image_url} alt="Shoes" className="rounded-xl" />
@@ -21,7 +21,9 @@ const Details = ({ categoryDetails }) => {
                     <h2 className="card-title">{title}</h2>
                     <p>{details}</p>
                     <button onClick={handleDownload} className='w-60 flex justify-center btn bg-gray-300 text-black'>
-                        <p className='text-blue-700 mr-2 mt-2 flex align-middle'>Click to download</p>
+                        <p className='text-blue-
+                        
+                        700 mr-2 mt-2 flex align-middle'>Click to download</p>
                         <div>
                             <FaFileDownload className=' h-10'></FaFileDownload>
                         </div>
