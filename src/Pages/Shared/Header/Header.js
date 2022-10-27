@@ -35,9 +35,8 @@ const Header = () => {
             <div>
                 <div className="navbar-center hidden lg:flex ml-10">
                     <ul className="menu menu-horizontal p-0 ">
-                        <div className="tooltip tooltip-bottom" data-tip="hello">
-                            <li><Link to='/'>Courses</Link></li>
-                        </div>
+                        <li><Link to='/'>Courses</Link></li>
+
                         <li><Link>FAQ</Link></li>
                         <li><Link to='/blogs'>Blogs</Link></li>
                         {

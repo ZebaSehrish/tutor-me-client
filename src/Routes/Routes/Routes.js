@@ -8,6 +8,7 @@ import Category from "../../Pages/Shared/Category/Category";
 import Courses from "../../Pages/Shared/Courses/Courses";
 import PrivateRoute from "../PrivateRouter/PrivateRoute";
 import CheckOut from "../../Pages/CheckOut/CheckOut";
+import UndefinedRoute from "../../Pages/UndefinedRoute/UndefinedRoute";
 
 export const routes = createBrowserRouter([
     {
@@ -47,5 +48,10 @@ export const routes = createBrowserRouter([
                 loader: ({ params }) => fetch(`http://localhost:5000/course-details/${params.id}`)
             }
         ]
+    },
+    {
+        path: '*',
+        element: <UndefinedRoute></UndefinedRoute>
     }
+
 ]);
