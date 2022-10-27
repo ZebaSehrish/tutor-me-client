@@ -6,7 +6,6 @@ import CourseDetailCard from '../CourseDetailsCard/CourseDetailCard';
 import LeftSideNav from '../LeftSideNav/LeftSideNav';
 const Courses = () => {
     const allCourseCategories = useLoaderData();
-    console.log(allCourseCategories);
     return (
         <div>
             <div className='card-container'>

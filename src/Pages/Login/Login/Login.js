@@ -1,7 +1,7 @@
 import { GoogleAuthProvider } from 'firebase/auth';
 import React, { useContext, useState } from 'react';
 import { FaGoogle, FaGithub } from 'react-icons/fa';
-import { Link, useNavigate } from 'react-router-dom';
+import { Form, Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../../Contexts/AuthProvider/AuthProvider';
 
 const Login = () => {
@@ -9,9 +9,9 @@ const Login = () => {
     const { signIn } = useContext(AuthContext);
 
     const navigate = useNavigate();
-    // const location = useLocation();
+    const location = useLocation();
 
-    // const from = location.state?.from?.pathname || '/';
+    const from = location.state?.from?.pathname || '/';
 
     const handleLoginSubmit = event => {
         event.preventDefault();
@@ -26,8 +26,7 @@ const Login = () => {
                 console.log(user);
                 form.reset();
                 setError('');
-                navigate('/');
-                // navigate(from, { replace: true })
+                navigate(from, { replace: true })
             })
             .catch(error => {
                 console.error(error);
@@ -43,6 +42,7 @@ const Login = () => {
             .then(result => {
                 const user = result.user;
                 console.log(user);
+                navigate(from, { replace: true })
             })
             .catch(error => console.error(error))
     }
@@ -55,7 +55,7 @@ const Login = () => {
                         <h1 className="text-5xl font-bold">Login now!</h1>
                     </div>
                     <form onSubmit={handleLoginSubmit}>
-                        <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100 mx-40 ">
+                        <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100 ">
                             <div className="card-body">
                                 <div className="form-control">
                                     <label className="label">
@@ -74,20 +74,23 @@ const Login = () => {
                                 </div>
                                 <div className="form-control mt-6">
                                     <button className="btn btn-primary">Login</button>
+                                    <p className='text-red-600 ml-2'>{error}</p>
                                 </div>
+                                <div className="form-control mt-6">
+                                    <button onClick={handleGoogleSignIn} className="btn btn-primary bg-gray-300 text-black"><FaGoogle className='mr-2 text-blue-600'></FaGoogle>Sign in with Google</button>
+                                </div>
+                                <button className="btn btn-primary bg-gray-300 text-black"><FaGithub className='mr-2'></FaGithub>Sign in with Github</button>
 
+                                <div className=" mt-6">
+                                    New to this website? <Link to='/signUp' className="btn btn-primary bg-gray-300 text-black">Sign up now! </Link>
+                                </div>
                             </div>
                         </div>
+
                     </form>
-                    <div className="form-control mt-6">
-                        <button className="btn btn-primary bg-gray-300 text-black"><FaGoogle className='mr-2 text-blue-600'></FaGoogle>Sign in with Google</button>
-                    </div>
-                    <div className="form-control mt-6">
-                        <button onClick={handleGoogleSignIn} className="btn btn-primary bg-gray-300 text-black"><FaGithub className='mr-2'></FaGithub>Sign in with Github</button>
-                    </div>
-                    <div className=" mt-6">
-                        New to this website? Please  <Link to='/signUp' className="btn btn-primary bg-gray-300 text-black">Register </Link>
-                    </div>
+
+
+
 
                 </div>
             </div>

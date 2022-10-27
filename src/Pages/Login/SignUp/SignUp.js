@@ -1,19 +1,21 @@
 import React, { useContext, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../../Contexts/AuthProvider/AuthProvider';
 
 const SignUp = () => {
     const [error, setError] = useState('');
     const [accepted, setAccepted] = useState(false);
     const { createUser } = useContext(AuthContext);
+    const navigate = useNavigate();
 
     const handleSubmit = event => {
         event.preventDefault();
         const form = event.target;
         const name = form.name.value;
         const email = form.email.value;
+        const photoUrl = form.photoUrl.value;
         const password = form.password.value;
-        console.log(name, email, password);
+        console.log(name, photoUrl, email, password);
 
         createUser(email, password)
             .then(result => {
@@ -21,6 +23,7 @@ const SignUp = () => {
                 console.log(user);
                 setError('');
                 form.reset();
+                navigate('/');
                 // handleUpdateUserProfile(name, photoURL);
             })
             .catch(e => {
@@ -37,13 +40,19 @@ const SignUp = () => {
                         <h1 className="text-5xl font-bold">Sign up now!</h1>
                     </div>
                     <form onSubmit={handleSubmit}>
-                        <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100 mx-40">
+                        <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100 ">
                             <div className="card-body">
                                 <div className="form-control">
                                     <label className="label">
                                         <span className="label-text">Full name:</span>
                                     </label>
                                     <input type="text" name='fullName' placeholder="Your full name" className="input input-bordered" required />
+                                </div>
+                                <div className="form-control">
+                                    <label className="label">
+                                        <span className="label-text">PhotoURL:</span>
+                                    </label>
+                                    <input type="text" name='photoUrl' placeholder="Your Photo URL" className="input input-bordered" required />
                                 </div>
                                 <div className="form-control">
                                     <label className="label">
@@ -59,6 +68,7 @@ const SignUp = () => {
                                 </div>
                                 <div className="form-control mt-6">
                                     <button className="btn btn-primary">Sign up</button>
+                                    <p className='text-red-600'>{error}</p>
                                 </div>
 
                                 <div className=" mt-6">
