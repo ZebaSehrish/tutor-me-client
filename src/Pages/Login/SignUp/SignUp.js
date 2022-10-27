@@ -4,18 +4,25 @@ import { AuthContext } from '../../../Contexts/AuthProvider/AuthProvider';
 
 const SignUp = () => {
     const [error, setError] = useState('');
-    // const [accepted, setAccepted] = useState(false);
+    const [nameError, setNameError] = useState('');
+
     const { createUser, updateUserProfile } = useContext(AuthContext);
     const navigate = useNavigate();
 
     const handleSubmit = event => {
         event.preventDefault();
         const form = event.target;
-        const name = form.name.value;
+        const displayName = form.displayName.value;
         const email = form.email.value;
         const photoURL = form.photoURL.value;
         const password = form.password.value;
-        console.log(name, photoURL, email, password);
+        console.log(displayName, photoURL, email, password);
+
+        if (!/^[a-zA-Z]+ [a-zA-Z]+$/.test(displayName)) {
+            setNameError('Please add first and last name');
+            return;
+        }
+        setNameError('');
 
         createUser(email, password)
             .then(result => {
@@ -23,8 +30,8 @@ const SignUp = () => {
                 console.log(user);
                 setError('');
                 form.reset();
-                navigate('/');
-                handleUpdateUserProfile(name, photoURL);
+                navigate('/login');
+                handleUpdateUserProfile(displayName, photoURL);
             })
             .catch(e => {
                 console.error(e);
@@ -32,9 +39,9 @@ const SignUp = () => {
             });
     }
 
-    const handleUpdateUserProfile = (name, photoURL) => {
+    const handleUpdateUserProfile = (displayName, photoURL) => {
         const profile = {
-            displayName: name,
+            displayName: displayName,
             photoURL: photoURL
         }
 
@@ -57,7 +64,8 @@ const SignUp = () => {
                                     <label className="label">
                                         <span className="label-text">Full name:</span>
                                     </label>
-                                    <input type="text" name='name' placeholder="Your full name" className="input input-bordered" required />
+                                    <p className='text-red-600'>{nameError}</p>
+                                    <input type="text" name='displayName' placeholder="Your full name" className="input input-bordered" required />
                                 </div>
                                 <div className="form-control">
                                     <label className="label">

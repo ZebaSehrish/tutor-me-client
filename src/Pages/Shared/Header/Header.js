@@ -20,6 +20,11 @@ const Header = () => {
                         <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" /></svg>
                     </label>
                     <ul tabIndex={0} className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52">
+                        <li className="form-control">
+                            <label className="label cursor-pointer">remember
+                                <input type="checkbox" className="toggle toggle-primary" checked />
+                            </label>
+                        </li>
                         <li><Link to='/'>Courses</Link></li>
                         <li><Link>FAQ</Link></li>
                         <li><Link to='/blogs'>Blogs</Link></li>
@@ -28,13 +33,21 @@ const Header = () => {
                     </ul>
                 </div>
                 <div className="flex-1">
-                    <Link className="btn btn-ghost normal-case text-3xl" to='/'><FaPython></FaPython>Tutor me</Link>
+                    <div>
+                        <Link className="btn btn-ghost normal-case text-3xl" to='/'><FaPython></FaPython>Tutor me</Link>
+                    </div>
+
                 </div>
 
             </div>
             <div>
                 <div className="navbar-center hidden lg:flex ml-10">
                     <ul className="menu menu-horizontal p-0 ">
+                        <li className="form-control">
+                            <label className="label cursor-pointer">
+                                <input type="checkbox" className="toggle toggle-primary" />
+                            </label>
+                        </li>
                         <li><Link to='/'>Courses</Link></li>
 
                         <li><Link>FAQ</Link></li>
@@ -60,7 +73,7 @@ const Header = () => {
                     <div className="dropdown dropdown-end">
                         {
                             user ?
-                                <div className="tooltip tooltip-left tooltip-info" data-tip={user.name}>
+                                <div className="tooltip tooltip-left tooltip-info" data-tip={user.displayName}>
                                     <label tabIndex={0} className="btn btn-ghost btn-circle avatar " >
                                         <div className=" rounded-full">
                                             {
@@ -92,7 +105,6 @@ const Header = () => {
                                 </Link>
                             </li>
                             <li><Link>Settings</Link></li>
-                            <li><Link>Logout</Link></li>
                         </ul>
                     </div>
                 </div>

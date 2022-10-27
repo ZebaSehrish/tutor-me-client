@@ -1,4 +1,4 @@
-import { GoogleAuthProvider } from 'firebase/auth';
+import { GithubAuthProvider, GoogleAuthProvider } from 'firebase/auth';
 import React, { useContext, useState } from 'react';
 import { FaGoogle, FaGithub } from 'react-icons/fa';
 import { Form, Link, useLocation, useNavigate } from 'react-router-dom';
@@ -36,9 +36,20 @@ const Login = () => {
 
     const { providerLogin } = useContext(AuthContext);
     const googleProvider = new GoogleAuthProvider();
+    const githubProvider = new GithubAuthProvider();
 
     const handleGoogleSignIn = () => {
         providerLogin(googleProvider)
+            .then(result => {
+                const user = result.user;
+                console.log(user);
+                navigate(from, { replace: true })
+            })
+            .catch(error => console.error(error))
+    }
+
+    const handleGithubSignIn = () => {
+        providerLogin(githubProvider)
             .then(result => {
                 const user = result.user;
                 console.log(user);
@@ -79,7 +90,7 @@ const Login = () => {
                                 <div className="form-control mt-6">
                                     <button onClick={handleGoogleSignIn} className="btn btn-primary bg-gray-300 text-black"><FaGoogle className='mr-2 text-blue-600'></FaGoogle>Sign in with Google</button>
                                 </div>
-                                <button className="btn btn-primary bg-gray-300 text-black"><FaGithub className='mr-2'></FaGithub>Sign in with Github</button>
+                                <button onClick={handleGithubSignIn} className="btn btn-primary bg-gray-300 text-black"><FaGithub className='mr-2'></FaGithub>Sign in with Github</button>
 
                                 <div className=" mt-6">
                                     New to this website? <Link to='/signUp' className="btn btn-primary bg-gray-300 text-black">Sign up now! </Link>

@@ -30,22 +30,17 @@ export const routes = createBrowserRouter([
             {
                 path: '/',
                 element: <Courses></Courses>,
-                loader: () => fetch('http://localhost:5000/courses-categories')
+                loader: () => fetch('https://tutor-me-server.vercel.app/courses-categories')
             },
-            // {
-            //     path: '/category-details/:id',
-            //     element: <></>,
-            //     loader: ({ params }) => fetch(`http://localhost:5000/course-details/${params.id}`)
-            // },
             {
                 path: '/category/:id',
                 element: <Category></Category>,
-                loader: ({ params }) => fetch(`http://localhost:5000/category/${params.id}`)
+                loader: ({ params }) => fetch(`https://tutor-me-server.vercel.app/category/${params.id}`)
             },
             {
                 path: '/course-details/:id',
                 element: <PrivateRoute> <CheckOut></CheckOut></PrivateRoute>,
-                loader: ({ params }) => fetch(`http://localhost:5000/course-details/${params.id}`)
+                loader: ({ params }) => fetch(`https://tutor-me-server.vercel.app/course-details/${params.id}`)
             }
         ]
     },

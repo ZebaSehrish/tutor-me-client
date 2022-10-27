@@ -7,7 +7,7 @@ import LeftSideNav from '../LeftSideNav/LeftSideNav';
 const Courses = () => {
     const allCourseCategories = useLoaderData();
     return (
-        <div>
+        <div className='mb-5'>
             <div className='card-container'>
                 <div className='row-span-4'><LeftSideNav></LeftSideNav></div>
                 <div className='course-container mt-16'>
