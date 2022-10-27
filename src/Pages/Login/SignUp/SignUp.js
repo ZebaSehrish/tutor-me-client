@@ -4,8 +4,8 @@ import { AuthContext } from '../../../Contexts/AuthProvider/AuthProvider';
 
 const SignUp = () => {
     const [error, setError] = useState('');
-    const [accepted, setAccepted] = useState(false);
-    const { createUser } = useContext(AuthContext);
+    // const [accepted, setAccepted] = useState(false);
+    const { createUser, updateUserProfile } = useContext(AuthContext);
     const navigate = useNavigate();
 
     const handleSubmit = event => {
@@ -13,9 +13,9 @@ const SignUp = () => {
         const form = event.target;
         const name = form.name.value;
         const email = form.email.value;
-        const photoUrl = form.photoUrl.value;
+        const photoURL = form.photoURL.value;
         const password = form.password.value;
-        console.log(name, photoUrl, email, password);
+        console.log(name, photoURL, email, password);
 
         createUser(email, password)
             .then(result => {
@@ -24,12 +24,23 @@ const SignUp = () => {
                 setError('');
                 form.reset();
                 navigate('/');
-                // handleUpdateUserProfile(name, photoURL);
+                handleUpdateUserProfile(name, photoURL);
             })
             .catch(e => {
                 console.error(e);
                 setError(e.message);
             });
+    }
+
+    const handleUpdateUserProfile = (name, photoURL) => {
+        const profile = {
+            displayName: name,
+            photoURL: photoURL
+        }
+
+        updateUserProfile(profile)
+            .then(() => { })
+            .catch((error => console.error(error)));
     }
 
     return (
@@ -46,13 +57,13 @@ const SignUp = () => {
                                     <label className="label">
                                         <span className="label-text">Full name:</span>
                                     </label>
-                                    <input type="text" name='fullName' placeholder="Your full name" className="input input-bordered" required />
+                                    <input type="text" name='name' placeholder="Your full name" className="input input-bordered" required />
                                 </div>
                                 <div className="form-control">
                                     <label className="label">
-                                        <span className="label-text">PhotoURL:</span>
+                                        <span className="label-text">photoURL:</span>
                                     </label>
-                                    <input type="text" name='photoUrl' placeholder="Your Photo URL" className="input input-bordered" required />
+                                    <input type="text" name='photoURL' placeholder="Your Photo URL" className="input input-bordered" required />
                                 </div>
                                 <div className="form-control">
                                     <label className="label">

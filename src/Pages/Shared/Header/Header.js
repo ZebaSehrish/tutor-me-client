@@ -59,7 +59,7 @@ const Header = () => {
                     </div>
                     <div className="dropdown dropdown-end">
                         {
-                            user?.displayName ?
+                            user ?
                                 <div className="tooltip tooltip-left tooltip-info" data-tip={user.displayName}>
                                     <label tabIndex={0} className="btn btn-ghost btn-circle avatar " >
                                         <div className=" rounded-full">
