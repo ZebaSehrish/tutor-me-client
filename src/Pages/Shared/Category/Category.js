@@ -5,8 +5,6 @@ import LeftSideNav from '../LeftSideNav/LeftSideNav';
 
 const Category = () => {
     const allCategoryDetails = useLoaderData();
-    console.log(allCategoryDetails);
-
     return (
         <div className=''>
             <div className='card-container'>
@@ -14,9 +12,11 @@ const Category = () => {
                 <div className='course-container mt-16'>
 
                     {
-                        allCategoryDetails.map(categoryDetails => <Details key={categoryDetails._id}
-                            categoryDetails={categoryDetails}
-                        ></Details>)
+                        allCategoryDetails.map(categoryDetails =>
+                            <Details key={categoryDetails._id}
+                                categoryDetails={categoryDetails}
+                            ></Details>
+                        )
                     }
                 </div>
             </div>

@@ -12,7 +12,7 @@ const Courses = () => {
                 <div className='row-span-4'><LeftSideNav></LeftSideNav></div>
                 <div className='course-container mt-16'>
                     {
-                        allCourseCategories.map(courseCategory => <CourseDetailCard key={courseCategory.id}
+                        allCourseCategories.map(courseCategory => <CourseDetailCard key={courseCategory.category_id}
                             courseCategory={courseCategory}
                         ></CourseDetailCard>)
                     }
